@@ -117,8 +117,8 @@ public class SampleTest extends AbstractSampleTest {
         requestGraphQL = "query { catById(id: " + id + ") { name age owner { name } } }";
         response = this.restTemplate.postForEntity("/graphql", new HttpEntity<>(requestGraphQL, headers), JsonNode.class);
         assertEquals(3, response.getBody().get("data").get("catById").get("age").asInt());
-        assertEquals(null, response.getBody().get("data").get("catById").get("name").asText());
-        assertEquals(null, response.getBody().get("data").get("catById").get("owner"));
+        assertEquals(true, response.getBody().get("data").get("catById").get("name").isNull());
+        assertEquals(true, response.getBody().get("data").get("catById").get("owner").isNull());
 
     }
 

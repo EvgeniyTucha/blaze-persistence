@@ -51,6 +51,6 @@ public class CatViewRepository {
 
     @Transactional
     public void save(Object o) {
-        evm.save(em, o);
+        evm.saveFull(em, o);
     }
 }
