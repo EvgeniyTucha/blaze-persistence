@@ -19,6 +19,7 @@ package com.blazebit.persistence.integration.graphql.spqr.resource;
 import com.blazebit.persistence.integration.graphql.GraphQLEntityViewSupport;
 import com.blazebit.persistence.integration.graphql.spqr.repository.CatViewRepository;
 import com.blazebit.persistence.integration.graphql.spqr.view.CatCreateView;
+import com.blazebit.persistence.integration.graphql.spqr.view.CatSimpleCreateView;
 import com.blazebit.persistence.integration.graphql.spqr.view.CatWithOwnerView;
 import com.blazebit.persistence.view.EntityViewManager;
 import com.blazebit.persistence.view.EntityViewSetting;

@@ -30,6 +30,10 @@ import java.util.Set;
 @EntityView(Cat.class)
 public interface CatCreateView extends CatSimpleCreateView {
 
+    void setName(String name);
+
+    void setAge(Integer age);
+
     Set<CatSimpleCreateView> getKittens();
     void setKittens(Set<CatSimpleCreateView> kittens);
 }

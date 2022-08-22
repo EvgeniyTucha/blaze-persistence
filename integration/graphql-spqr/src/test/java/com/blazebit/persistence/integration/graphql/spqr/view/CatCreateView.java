@@ -32,4 +32,6 @@ public interface CatCreateView extends CatSimpleCreateView {
 
     Set<CatSimpleCreateView> getKittens();
     void setKittens(Set<CatSimpleCreateView> kittens);
+
+    void setId(Long id);
 }

@@ -92,10 +92,34 @@ public class SampleTest extends AbstractSampleTest {
 
         int id = response.getBody().get("data").get("createCat").asInt();
 
-        requestGraphQL = "query { catById(id: " + id + ") { name } }";
+        requestGraphQL = "query { catById(id: " + id + ") { name age owner { name } } }";
         response = this.restTemplate.postForEntity("/graphql", new HttpEntity<>(requestGraphQL, headers), JsonNode.class);
         String name = response.getBody().get("data").get("catById").get("name").asText();
         assertEquals("Test", name);
+        String ownerName = response.getBody().get("data").get("catById").get("owner").get("name").asText();
+        assertEquals("Person 0", ownerName);
+        assertEquals(1, response.getBody().get("data").get("catById").get("age").asInt());
+
+        // unlink owner from a cat -> set it to owner: null and
+        requestGraphQL = "mutation {\n" +
+                "  createCat(\n" +
+                "    cat: {\n" +
+                "      id: " + id + "\n" +
+                "      age: 3\n" +
+                "      name: null" +
+                "      owner: null\n" +
+                "  \t}\n" +
+                "  )\n" +
+                "}";
+        response = this.restTemplate.postForEntity("/graphql", new HttpEntity<>(requestGraphQL, headers), JsonNode.class);
+
+
+        requestGraphQL = "query { catById(id: " + id + ") { name age owner { name } } }";
+        response = this.restTemplate.postForEntity("/graphql", new HttpEntity<>(requestGraphQL, headers), JsonNode.class);
+        assertEquals(3, response.getBody().get("data").get("catById").get("age").asInt());
+        assertEquals(null, response.getBody().get("data").get("catById").get("name").asText());
+        assertEquals(null, response.getBody().get("data").get("catById").get("owner"));
+
     }
 
     static String request(int first, String after) {

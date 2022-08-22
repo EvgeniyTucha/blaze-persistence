@@ -31,4 +31,6 @@ public interface CatSimpleView {
     Long getId();
 
     String getName();
+
+    Integer getAge();
 }
