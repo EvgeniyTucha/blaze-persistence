@@ -158,7 +158,7 @@ public class MappingSubqueryTest extends AbstractEntityViewTest {
     public void testSubqueryEntityViewSettings() {
         EntityViewManager evm = build(DocumentWithSubquery.class);
 
-        CriteriaBuilder<Document> cb = cbf.create(em, Document.class).orderByDesc("id");
+        CriteriaBuilder<Document> cb = cbf.create(em, Document.class).fetch("id").orderByDesc("id");
         EntityViewSetting<DocumentWithSubquery, PaginatedCriteriaBuilder<DocumentWithSubquery>> setting = EntityViewSetting
                 .create(DocumentWithSubquery.class, 0, 1);
         setting.addOptionalParameter("optionalParameter", 1);
